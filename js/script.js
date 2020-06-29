@@ -26,6 +26,12 @@ function create() {
     ball.anchor.set(0.5);
     game.physics.enable(ball, Phaser.Physics.ARCADE);
     ball.body.collideWorldBounds = true;
+    game.physics.arcade.checkCollision.down = false;
+    ball.checkWorldBounds = true;
+    ball.events.onOutOfBounds.add(function () {
+        alert('Game over!');
+        location.reload();
+    }, this);
     ball.body.bounce.set(1);
     ball.body.velocity.set(150, -150);
 
