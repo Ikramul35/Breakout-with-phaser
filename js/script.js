@@ -4,11 +4,13 @@ var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {
     update: update,
 });
 
-var ball;
-var paddle;
-var bricks;
-var newBrick;
-var brickInfo;
+var ball,
+    paddle,
+    bricks,
+    newBrick,
+    brickInfo,
+    scoreText,
+    score = 0;
 
 function preload() {
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -50,6 +52,11 @@ function create() {
     paddle.body.immovable = true;
 
     initBricks();
+
+    scoreText = game.add.text(5, 5, 'Points: 0', {
+        font: '18px Arial',
+        fill: '#0085DD',
+    });
 }
 
 function update() {
@@ -92,4 +99,6 @@ function initBricks() {
 
 function ballHitBrick(ball, brick) {
     brick.kill();
+    score += 10;
+    scoreText.setText('Points: ' + score);
 }
